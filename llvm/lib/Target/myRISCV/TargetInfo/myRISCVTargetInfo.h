@@ -1,0 +1,12 @@
+#ifndef LLVM_LIB_TARGET_myRISCV_TARGETINFO_myRISCVTARGETINFO_H
+#define LLVM_LIB_TARGET_AARCH64_TARGETINFO_AARCH64TARGETINFO_H
+
+namespace llvm{
+
+class Target;
+
+Target getmyRISCVTarget();
+
+}
+
+#endif
