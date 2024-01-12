@@ -1,10 +1,10 @@
 include "myRISCVInstrFormats.td"
 
-def imm12 : Operand<XLenVT>{
+def simm12 : Operand<XLenVT>{
   bits<12> imm;
   let OperandNamespace = "myRISCVOp";
 }
-def imm20 : Operand<XLenVT>{
+def simm20 : Operand<XLenVT>{
   bits<20> imm;
   let OperandNamespace = "myRISCVOp";
 }
@@ -14,11 +14,11 @@ class ALU_r<bits<7> opcode, bits<3> func3, bits<7> func7, string instr>
 }
 
 class ALU_i<bits<7> opcode, bits<3> func3, string instr>
-           : IInstr<opcode, func3, (outs GPR:$rd), (ins GPR:$rs1, imm12:$imm), instr>{
+           : IInstr<opcode, func3, (outs GPR:$rd), (ins GPR:$rs1, simm12:$imm12), instr>{
 }
 
 class ALU_u<bits<7> opcode, string instr>
-           : UInstr<opcode, (outs GPR:$rd), (ins imm20:$imm), instr>{
+           : UInstr<opcode, (outs GPR:$rd), (ins simm20:$imm20), instr>{
 }
 
 def ADDI : ALU_r<0b0010011, 0b000, "addi">;
