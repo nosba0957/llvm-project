@@ -41,7 +41,7 @@ def X31 : myRISCVReg<31, "x31", ["t6"]>, DwarfRegNum<[31]>;
 def XLenVT : ValueTypeByHwMode<[RV32, RV64],
                                [i32, i64]>;
 
-def GPR : RegisterClass<"myRISCV", XLenVT, 32,
+def GPR : RegisterClass<"myRISCV", [XLenVT], 32,
   (add X0, X1, X2, X3, X4,
   X5, X6, X7, X8, X9, X10,
   X11, X12, X13, X14, X15,
