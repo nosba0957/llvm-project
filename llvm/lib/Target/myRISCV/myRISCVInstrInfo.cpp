@@ -1,10 +1,10 @@
-#define GET_INSTRINFO_NAMED_OPS // For getNamedOperandIdx() function
-#include "myRISCVGenInstrInfo.inc"
-
 #include "myRISCVInstrInfo.h"
+
+#define GET_INSTRINFO_CTOR_DTOR
+#define GET_INSTRINFO_ENUM
+#include "myRISCVGenInstrInfo.inc"
 
 using namespace llvm;
 
-namespace myRISCV{
-  myRISCVInstrInfo::myRISCVInstrInfo();
-}
+myRISCVInstrInfo::myRISCVInstrInfo()
+    : myRISCVGenInstrInfo(myRISCV::ADJCALLSTACKDOWN, myRISCV::ADJCALLSTACKUP) {}

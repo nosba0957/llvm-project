@@ -4,6 +4,9 @@ class myRISCVReg<bits<5> enc, string n, list<string> alt = []> : Register<n> {
   let HWEncoding{4-0} = enc;
   let AltNames = alt;
 }
+
+//class myRISCVGPRReg<bits<5> Enc, string n, list<string> alt> : myRISCVReg<Enc, n, alt>;
+
 def X0 : myRISCVReg<0, "x0", ["zero"]>, DwarfRegNum<[0]>;
 def X1 : myRISCVReg<1, "x1", ["ra"]>, DwarfRegNum<[1]>;
 def X2 : myRISCVReg<2, "x2", ["sp"]>, DwarfRegNum<[2]>;
@@ -41,7 +44,7 @@ def X31 : myRISCVReg<31, "x31", ["t6"]>, DwarfRegNum<[31]>;
 def XLenVT : ValueTypeByHwMode<[RV32, RV64],
                                [i32, i64]>;
 
-def GPR : RegisterClass<"myRISCV", [XLenVT], 32,
+def GPR : RegisterClass<"myRISCV", [XLenVT, i32], 32,
   (add X0, X1, X2, X3, X4,
   X5, X6, X7, X8, X9, X10,
   X11, X12, X13, X14, X15,
@@ -49,6 +52,7 @@ def GPR : RegisterClass<"myRISCV", [XLenVT], 32,
   X21, X22, X23, X24, X25,
   X26, X27, X28, X29, X30,
   X31)>{
-    let RegInfos = XLenVT;
+    let RegInfos = RegInfoByHwMode<
+            [RV32,              RV64,              DefaultMode],
+            [RegInfo<32,32,32>, RegInfo<64,64,64>, RegInfo<32,32,32>]>; // DefaultMode must implement
 }
-

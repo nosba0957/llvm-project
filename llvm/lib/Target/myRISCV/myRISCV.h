@@ -4,14 +4,11 @@
 #include "llvm/Target/TargetMachine.h"
 
 namespace llvm {
-class myRISCVTargetMachine : public TargetMachine {
-public:
-  myRISCVTargetMachine(const Target &T, const StringRef DataLayoutString,
-                       const Triple &TargetTriple, StringRef CPU, StringRef FS,
-                       const TargetOptions &Options)
-    : TargetMachine(T, DataLayoutString, TargetTriple, CPU, FS, Options) {}
-    
-};
+class FunctionPass;
+class myRISCVTargetMachine;
+
+FunctionPass *createmyRISCVISelDAG(myRISCVTargetMachine &TM,
+                                   CodeGenOptLevel OptLevel);
 } // End namespace llvm
 
 #endif
