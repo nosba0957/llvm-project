@@ -53,6 +53,10 @@ public:
     return &TSInfo;
   }
 
+  bool enableMachineScheduler() const override {
+    return true;
+  } // this function decide using which dag scheduler
+
   // autogen by tablegen
   void ParseSubtargetFeatures(StringRef CPU, StringRef TuneCPU, StringRef FS);
 };

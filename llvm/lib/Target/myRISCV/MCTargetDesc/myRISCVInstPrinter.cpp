@@ -17,7 +17,7 @@ void myRISCVInstPrinter::printInst(const MCInst *MI, uint64_t Address,
                                    StringRef Annot, const MCSubtargetInfo &STI,
                                    raw_ostream &OS) {
   const MCInst *NewMI = MI;
-  if (!printAliasInstr(NewMI, Address, STI, OS)) {
+  if (!PrintAliases || !printAliasInstr(NewMI, Address, STI, OS)) {
     printInstruction(NewMI, Address, STI, OS);
   }
   printAnnotation(OS, Annot);
@@ -28,7 +28,6 @@ void myRISCVInstPrinter::printOperand(const MCInst *MI, unsigned OpNo,
                                       raw_ostream &OS, const char *Modifier) {
   const MCOperand &MO = MI->getOperand(OpNo);
 
-  std::cout << "pass?\n";
   if (MO.isReg()) {
     printRegName(OS, MO.getReg());
     return;
